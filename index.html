@@ -17,7 +17,26 @@
     <img src="./gifs/preloader.gif" alt="running man" id="preloader-gif"/>
 </div>
 
-<h1>js-stopwatch</h1>
+<!-- begin of project -->
+<div class="wrapper">
+    <section class="heading">
+        <h1 class="heading-title">stopwatch</h1>
+    </section>
+    <main class="app">
+        <section class="time-wrapper">
+            <h2 class="time-title">Time</h2>
+            <div id="time-display" class="time-display-area">00:00.00</div>
+        </section>
+        <section class="button-wrapper">
+            <button id="lap-btn" class="btn btn-fill">lap</button>
+            <button id="start-btn" class="btn btn-expanded">start</button>
+        </section>
+        <section class="lap-wrapper">
+            <h2 class="lap-title">laps</h2>
+            <ul id="lap-time-list" class="lap-list"></ul>
+        </section>
+    </main>
+</div>
 
 <!-- jquery scripts-->
 <script src="./js/jquery-3.6.1.min.js"></script>

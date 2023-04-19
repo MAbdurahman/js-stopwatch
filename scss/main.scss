@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=DM+Sans:wght@400;500&display=swap');
 /* ==========================================
               Website Resets
 ============================================= */
@@ -108,14 +108,14 @@
   --clr-semantic-a-200: hsla(0, 82%, 31%, 100%);
   --clr-semantic-a-100: hsla(0, 96%, 38%, 100%);
 
-  --ff-font-head: 'DM Serif Display', serif;
-  --ff-font-number: 'DM Sans', sans-serif;
+
+  --ff-font-body: 'DM Sans', sans-serif;
   --ff-font-display: 'DM Mono', monospace;
 
 
   --fw-font-weight-400: 400;
   --fw-font-weight-500: 500;
-  --fw-font-weight-700: 700;
+
 
   --ls-letter-spacing: 1px;
 
@@ -135,7 +135,6 @@ html {
     font-size: 66.667%;
   }
 }
-
 
 body {
   width: 100%;
@@ -163,14 +162,14 @@ body {
 h1, h2, h3, h4, h5 {
   margin: 3rem 0 1.38rem;
   font-family: var(--ff-font-body);
-  font-weight: var(--fw-font-weight-600);
+  font-weight: var(--fw-font-weight-500);
   line-height: 1;
 }
 
 h1 {
   margin-top: 0;
   font-size: 3rem;
-  font-weight: var(--fw-font-weight-700);
+  font-weight: var(--fw-font-weight-500);
 
 }
 
@@ -265,6 +264,81 @@ input::placeholder {
 
 
 
+
+
+
+
+
+
+
+/*=============================================
+          wrapper
+================================================*/
+div.wrapper {
+  width: 100%;
+  max-width: 640px;
+  padding: 16px 32px;
+  border-radius: var(--br-border-radius);
+  background: hsla(0, 0%, 94%, 70%);
+  background: var(--clr-neutral-800);
+}
+@media only screen and (max-height: 667px){
+  .wrapper {
+    padding-top: 4px;
+  }
+}
+
+/*=============================================
+        heading
+================================================*/
+.heading {
+  margin-bottom:  .75em;
+  font-weight: var(--fw-font-weight-700);
+  text-transform: capitalize;
+  text-align: center;
+  color: var(--clr-neutral-200);
+}
+
+.heading-title {
+  font-size: 1.9rem;
+}
+@media only screen and (max-width: 540px) {
+  .heading-title {
+    margin-bottom: 1.5em;
+  }
+}
+
+
+/*=============================================
+          time-display-area
+================================================*/
+section.time-wrapper {
+  position: relative;
+  margin-bottom: .5em;
+  padding: 16px;
+  background-color: var(--clr-neutral-800);;
+  border: 1px solid var(--clr-neutral-300);
+  border-radius: var(--br-border-radius);
+}
+
+.time-title {
+  position: absolute;
+  top: 0;
+  margin: -9px 0 0;
+  padding: 0 3px;
+  font-size: 18px;
+  line-height: 1;
+  background-color: var(--clr-neutral-100);
+  color: var(--clr-neutral-300);
+  background-image: radial-gradient(circle, var(--clr-neutral-800) 28%, var(--clr-neutral-800) 100%);
+}
+
+.time-display-area {
+  font-size: 3rem;
+  font-family: var(--ff-font-display);
+  text-align: center;
+  color: var(--clr-neutral-100);
+}
 
 
 
