@@ -1,0 +1,262 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+/* ==========================================
+              Website Resets
+============================================= */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+*::-moz-focus-inner {
+  border: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+/*=============================================
+         root, html,  and body styles
+================================================*/
+:root {
+  --clr-primary-100: hsla(210, 67%, 98%, 100%);
+  --clr-primary-200: hsla(210, 67%, 86%, 100%);
+  --clr-primary-300: hsla(210, 67%, 68%, 100%);
+  --clr-primary-400: hsla(210, 68%, 60%, 100%);
+  --clr-primary-500: hsla(210, 67%, 44%, 100%);
+  --clr-primary-600: hsla(210, 67%, 39%, 100%);
+  --clr-primary-700: hsla(210, 67%, 34%, 100%);
+  --clr-primary-800: hsla(210, 67%, 29%, 100%);
+
+  --clr-secondary-100: hsla(43, 59%, 92%, 100%);
+  --clr-secondary-200: hsla(43, 59%, 86%, 100%);
+  --clr-secondary-300: hsla(43, 59%, 80%, 100%);
+  --clr-secondary-400: hsla(43, 59%, 74%, 100%);
+  --clr-secondary-500: hsla(43, 59%, 68%, 100%);
+  --clr-secondary-600: hsla(43, 59%, 62%, 100%);
+  --clr-secondary-700: hsla(43, 59%, 56%, 100%);
+  --clr-secondary-800: hsla(43, 59%, 50%, 100%);
+
+  --clr-tertiary-100: hsla(30, 96%, 62%, 100%);
+  --clr-tertiary-200: hsla(30, 96%, 59%, 100%);
+  --clr-tertiary-300: hsla(30, 96%, 56%, 100%);
+  --clr-tertiary-400: hsla(30, 96%, 53%, 100%);
+  --clr-tertiary-500: hsla(30, 96%, 50%, 100%);
+  --clr-tertiary-600: hsla(30, 96%, 47%, 100%);
+  --clr-tertiary-700: hsla(30, 96%, 44%, 100%);
+  --clr-tertiary-800: hsla(30, 96%, 41%, 100%);
+
+  --clr-accent-100: hsla(71, 85%, 50%, 100%);
+  --clr-accent-200: hsla(71, 85%, 47%, 100%);
+  --clr-accent-300: hsla(71, 85%, 44%, 100%);
+  --clr-accent-400: hsla(71, 85%, 41%, 100%);
+  --clr-accent-500: hsla(71, 85%, 38%, 100%);
+  --clr-accent-600: hsla(71, 85%, 35%, 100%);
+  --clr-accent-700: hsla(71, 85%, 32%, 100%);
+  --clr-accent-800: hsla(71, 85%, 29%, 100%);
+
+  --clr-neutral-100: hsla(0, 0%, 98%, 100%);
+  --clr-neutral-200: hsla(0, 0%, 94%, 100%);
+  --clr-neutral-300: hsla(0, 0%, 85%, 100%);
+  --clr-neutral-400: hsla(0, 0%, 75%, 100%);
+  --clr-neutral-500: hsla(0, 0%, 60%, 100%);
+  --clr-neutral-600: hsla(0, 0%, 38%, 100%);
+  --clr-neutral-700: hsla(0, 0%, 19%, 100%);
+  --clr-neutral-800: hsla(0, 0%, 7%, 100%);
+
+  --clr-augmented-000: hsla(210, 15%, 88%, 100%);
+  --clr-augmented-100: hsla(210, 15%, 58%, 100%);
+  --clr-augmented-200: hsla(210, 11%, 50%, 100%);
+  --clr-augmented-300: hsla(210, 11%, 36%, 100%);
+  --clr-augmented-400: hsla(210, 25%, 19%, 100%);
+
+  --clr-assigned-01: var(--clr-primary-800);
+  --clr-assigned-02: var(--clr-secondary-800);
+  --clr-assigned-03: var(--clr-tertiary-800);
+  --clr-assigned-04: var(--clr-accent-800);
+  --clr-assigned-05: var(--clr-augmented-400);
+  --clr-assigned-06: var(--clr-augmented-300);
+  --clr-assigned-07: var(--clr-augmented-200);
+  --clr-assigned-08: var(--clr-augmented-100);
+  --clr-assigned-09: var(--clr-neutral-500);
+  --clr-assigned-10: var(--clr-neutral-400);
+  --clr-assigned-11: var(--clr-neutral-300);
+  --clr-assigned-12: var(--clr-neutral-200);
+  --clr-assigned-13: var(--clr-neutral-600);
+
+  --clr-semantic-s-400: hsla(100, 72%, 23%, 100%);
+  --clr-semantic-s-300: hsla(100, 85%, 26%, 100%);
+  --clr-semantic-s-200: hsla(100, 82%, 31%, 100%);
+  --clr-semantic-s-100: hsla(100, 96%, 33%, 100%);
+
+  --clr-semantic-w-400: hsla(48, 72%, 42%, 100%);
+  --clr-semantic-w-300: hsla(48, 85%, 43%, 100%);
+  --clr-semantic-w-200: hsla(48, 82%, 48%, 100%);
+  --clr-semantic-w-100: hsla(48, 96%, 49%, 100%);
+
+  --clr-semantic-a-400: hsla(0, 72%, 23%, 100%);
+  --clr-semantic-a-300: hsla(0, 85%, 26%, 100%);
+  --clr-semantic-a-200: hsla(0, 82%, 31%, 100%);
+  --clr-semantic-a-100: hsla(0, 96%, 38%, 100%);
+
+  --ff-font-head: 'DM Serif Display', serif;
+  --ff-font-number: 'DM Sans', sans-serif;
+  --ff-font-display: 'DM Mono', monospace;
+
+
+  --fw-font-weight-400: 400;
+  --fw-font-weight-500: 500;
+  --fw-font-weight-700: 700;
+
+  --ls-letter-spacing: 1px;
+
+  --br-border-radius: 5px;
+}
+
+html {
+  font-size: 100%;
+}
+@media only screen and (max-width: 420px){
+  html {
+    font-size: 83.333%;
+  }
+}
+@media only screen and (max-width: 360px){
+  html {
+    font-size: 66.667%;
+  }
+}
+
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--ff-font-body);
+  font-weight: var(--fw-font-weight-400);
+  font-size: 1rem;
+  letter-spacing: var(--ls-letter-spacing);
+  color: var(--clr-augmented-400);
+  background-image: radial-gradient(circle, var(--clr-neutral-200) 28%, var(--clr-neutral-200) 100%);
+
+}
+
+@media only screen and (max-width: 540px) {
+  body {
+    overflow: hidden;
+  }
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 3rem 0 1.38rem;
+  font-family: var(--ff-font-body);
+  font-weight: var(--fw-font-weight-600);
+  line-height: 1;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3rem;
+  font-weight: var(--fw-font-weight-700);
+
+}
+
+h2 {font-size: 2rem;}
+
+h3 {font-size: 1.9rem;}
+
+h4 {font-size: 1.5rem;}
+
+h5 {font-size: 1.25rem;}
+
+p {margin-bottom: 1rem;}
+
+small, .text_small {font-size: 0.8rem;}
+
+input, textarea {
+  font-family: var(--ff-font-body);
+}
+
+ul {
+  list-style: none;
+}
+
+*::placeholder,
+input::placeholder {
+  color: var(--clr-augmented-200);
+}
+
+.interim:empty:before {
+  content:attr(data-placeholder);
+  color: var(--clr-augmented-200);
+}
+
+/*=============================================
+      scrollbar styles
+================================================*/
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+
+}
+/* track */
+::-webkit-scrollbar-track {
+  margin-left: 4px;
+  box-shadow: inset 0 0 5px var(--clr-neutral-400);
+  border-radius: var(--br-border-radius);
+
+}
+
+/* handle */
+::-webkit-scrollbar-thumb {
+  background: var(--clr-neutral-300);
+  border-radius: var(--br-border-radius);
+}
+
+/* handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-neutral-600);
+}
+
+/* =========================================
+              preloader
+============================================ */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle, #ffffff 28%, #ffffff 100%);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+#preloader-gif {
+  width: 33.333%;
+  align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+  #preloader-gif {
+    width: 50%;
+  }
+}
