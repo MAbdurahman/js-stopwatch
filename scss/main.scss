@@ -257,6 +257,63 @@ input::placeholder {
 
 @media screen and (max-width: 768px) {
   #preloader-gif {
-    width: 50%;
+    width: 60%;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*=============================================
+          buttons
+================================================*/
+.btn {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn::before,
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  transition: all 0.25s ease;
+}
+
+.btn-fill::before {
+  transition-duration:  0.5s;
+  box-shadow: inset 0 0 0 1px var(--clr-primary-800);
+
+}
+.btn-fill:hover::before {
+  box-shadow: inset 0 0 0 60px var(--clr-primary-800);
+}
+
+.btn-expanded::after {
+  box-shadow: inset 0 0 0 1px var(--clr-primary-800);
+}
+
+.btn-expanded::before {
+  background-color: var(--clr-primary-800);
+  box-shadow: inset 0 0 0 60px black;
+
+}
+.btn-expanded:hover::before {
+  box-shadow: inset 0 0 0 1px black;
 }
