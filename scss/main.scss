@@ -74,10 +74,14 @@
   --clr-neutral-800: hsla(0, 0%, 7%, 100%);
 
   --clr-augmented-000: hsla(210, 15%, 88%, 100%);
-  --clr-augmented-100: hsla(210, 15%, 58%, 100%);
-  --clr-augmented-200: hsla(210, 11%, 50%, 100%);
-  --clr-augmented-300: hsla(210, 11%, 36%, 100%);
-  --clr-augmented-400: hsla(210, 25%, 19%, 100%);
+  --clr-augmented-100: hsla(210, 25%, 85%, 100%);
+  --clr-augmented-200: hsla(210, 25%, 75%, 100%);
+  --clr-augmented-300: hsla(210, 25%, 65%, 100%);
+  --clr-augmented-400: hsla(210, 25%, 55%, 100%);
+  --clr-augmented-500: hsla(210, 25%, 45%, 100%);
+  --clr-augmented-600: hsla(210, 25%, 35%, 100%);
+  --clr-augmented-700: hsla(210, 25%, 25%, 100%);
+  --clr-augmented-800: hsla(210, 25%, 20%, 100%);
 
   --clr-assigned-01: var(--clr-primary-800);
   --clr-assigned-02: var(--clr-secondary-800);
@@ -93,29 +97,31 @@
   --clr-assigned-12: var(--clr-neutral-200);
   --clr-assigned-13: var(--clr-neutral-600);
 
-  --clr-semantic-s-400: hsla(100, 72%, 23%, 100%);
-  --clr-semantic-s-300: hsla(100, 85%, 26%, 100%);
-  --clr-semantic-s-200: hsla(100, 82%, 31%, 100%);
-  --clr-semantic-s-100: hsla(100, 96%, 33%, 100%);
+  --clr-semantic-a-400: hsla(0, 96%, 33%, 100%);
+  --clr-semantic-a-300: hsla(0, 96%, 38%, 100%);
+  --clr-semantic-a-200: hsla(0, 96%, 43%, 100%);
+  --clr-semantic-a-100: hsla(0, 96%, 48%, 100%);
 
-  --clr-semantic-w-400: hsla(48, 72%, 42%, 100%);
-  --clr-semantic-w-300: hsla(48, 85%, 43%, 100%);
-  --clr-semantic-w-200: hsla(48, 82%, 48%, 100%);
-  --clr-semantic-w-100: hsla(48, 96%, 49%, 100%);
+  --clr-semantic-i-400: hsla(215, 96%, 33%, 100%);
+  --clr-semantic-i-300: hsla(215, 96%, 38%, 100%);
+  --clr-semantic-i-200: hsla(215, 96%, 43%, 100%);
+  --clr-semantic-i-100: hsla(215, 96%, 48%, 100%);
 
-  --clr-semantic-a-400: hsla(0, 72%, 23%, 100%);
-  --clr-semantic-a-300: hsla(0, 85%, 26%, 100%);
-  --clr-semantic-a-200: hsla(0, 82%, 31%, 100%);
-  --clr-semantic-a-100: hsla(0, 96%, 38%, 100%);
+  --clr-semantic-s-400: hsla(100, 96%, 33%, 100%);
+  --clr-semantic-s-300: hsla(100, 96%, 38%, 100%);
+  --clr-semantic-s-200: hsla(100, 96%, 43%, 100%);
+  --clr-semantic-s-100: hsla(100, 96%, 48%, 100%);
 
+  --clr-semantic-w-400: hsla(48, 96%, 50%, 100%);
+  --clr-semantic-w-300: hsla(48, 96%, 55%, 100%);
+  --clr-semantic-w-200: hsla(48, 96%, 60%, 100%);
+  --clr-semantic-w-100: hsla(48, 96%, 65%, 100%);
 
   --ff-font-body: 'DM Sans', sans-serif;
   --ff-font-display: 'DM Mono', monospace;
 
-
   --fw-font-weight-400: 400;
   --fw-font-weight-500: 500;
-
 
   --ls-letter-spacing: 1px;
 
@@ -328,8 +334,8 @@ section.time-wrapper {
   padding: 0 3px;
   font-size: 18px;
   line-height: 1;
-  background-color: var(--clr-neutral-100);
   color: var(--clr-neutral-300);
+  background-color: var(--clr-neutral-800);
   background-image: radial-gradient(circle, var(--clr-neutral-800) 28%, var(--clr-neutral-800) 100%);
 }
 
@@ -394,7 +400,7 @@ section.button-wrapper {
   -o-transition: all 300ms;
   -webkit-transition: all 300ms;
   transition: all 300ms;
-  background: white;
+  background: var(--clr-neutral-100);
 }
 
 .btn-fill::after {
