@@ -6,9 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--favicon -->
-    <link rel="shortcut icon" href="favicon.ico" >
+    <link rel="shortcut icon" href="favicon.ico">
     <!-- normalize css-->
-    <link rel="stylesheet" href="./css/normalize.css" >
+    <link rel="stylesheet" href="./css/normalize.css">
     <!-- main styles -->
     <link rel="stylesheet" href="./css/main.css">
     <title>Stopwatch</title>
@@ -25,9 +25,35 @@
         <h1 class="heading-title">stopwatch</h1>
     </section>
     <main class="app">
-        <section class="time-wrapper">
+        <!--<section class="time-wrapper">
             <h2 class="time-title">Time</h2>
             <div id="time-display" class="time-display-area">00:00.000</div>
+        </section>-->
+        <section class="carousel">
+            <div id="slider" class="slider">
+                <section class="slider-content slider-content--1">
+                    <section class="time-wrapper">
+                        <h2 class="time-title">Time</h2>
+                        <div id="time-display" class="center-div-horizontally-vertically  time-display-area">00:00.000
+                        </div>
+                    </section>
+                </section>
+                <section class="slider-content slider-content--2">
+                    <img src="./img/stopwatch-face.png" class="responsive" alt="stopwatch face">
+                </section>
+            </div>
+            <!--<div class="controls">
+                <ul id="indicators-list" class="indicators-list">
+                    <li class="indicator selected"></li>
+                    <li class="indicator"></li>
+                </ul>
+            </div>-->
+        </section>
+        <section class="controls">
+            <ul id="indicators-list" class="indicators-list">
+                <li class="indicator selected"></li>
+                <li class="indicator"></li>
+            </ul>
         </section>
         <section class="button-wrapper">
             <button id="lap-btn" class="btn-default btn-fill">lap</button>

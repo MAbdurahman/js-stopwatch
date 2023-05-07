@@ -234,6 +234,27 @@ input::placeholder {
   background: var(--clr-neutral-600);
 }
 
+.responsive {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+}
+
+.center-div-vertically {
+  position: absolute;
+  top: 50%;
+  padding: 10px;
+  transform: translate(0, -50%);
+}
+
+.center-div-horizontally-vertically {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 10px;
+  transform: translate(-50%, -50%);
+}
+
 /* =========================================
               preloader
 ============================================ */
@@ -301,11 +322,88 @@ div.wrapper {
   }
 }
 /*=============================================
+          carousel - slider
+================================================*/
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 1.5em;
+  /*border: 2px solid var(--clr-neutral-200);*/
+  overflow: hidden;
+}
+
+.slider {
+  width: 200%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  transition: all 0.5s cubic-bezier(0.12, 0.9, 0.42, -0.63);
+}
+
+.slider-content {
+  position: relative;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  /*text-align: center;*/
+}
+
+section.controls {
+  position: relative;
+  height: 25%;
+}
+
+.controls .indicators-list {
+  position: absolute;
+  height: 100%;
+  z-index: 10;
+  left: 50%;
+  bottom: 0%;
+  margin-bottom: 1em;
+  transform: translate(-50%, -50%);
+}
+
+.indicators-list {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+}
+
+.indicator {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-color: var(--clr-neutral-500);
+  border-radius: 50%;
+  border: 2px solid var(--clr-neutral-500);
+  cursor: pointer;
+}
+
+.indicator:not(:last-of-type) {
+  margin-right: 0.5em;
+}
+
+.indicator.selected {
+  background-color: transparent;
+  border: 2px solid var(--clr-neutral-100);
+}
+
+/*=============================================
           time-display-area
 ================================================*/
 section.time-wrapper {
   position: relative;
-  margin-bottom: 0.5em;
+  width: 100%;
+  height: 100%;
+  /*margin-bottom: .5em;*/
   padding: 16px;
   background-color: var(--clr-neutral-800);
   border: 1px solid var(--clr-neutral-300);
@@ -325,10 +423,14 @@ section.time-wrapper {
 }
 
 .time-display-area {
-  font-size: 3rem;
+  font-size: 2rem;
   font-family: var(--ff-font-display);
   text-align: center;
   color: var(--clr-neutral-100);
+}
+
+#time-display.time-display-area {
+  text-align: center;
 }
 
 /*=============================================
@@ -338,7 +440,8 @@ section.button-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 1.5em;
+  /*margin-top: 1.5em;*/
+  margin-bottom: 1em;
   padding: 16px;
 }
 
