@@ -554,7 +554,7 @@ section.lap-wrapper {
   background-image: radial-gradient(circle, var(--clr-neutral-800) 28%, var(--clr-neutral-800) 100%);
 }
 
-.no-lap-count {
+.no-lap-count, .no-lap-count-para {
   font-size: 1rem;
   color: var(--clr-neutral-500);
 }
