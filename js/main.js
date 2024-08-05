@@ -77,10 +77,23 @@ $(function () {
   const time_display = document.getElementById('time-display');
   const lap_time_list = document.getElementById('lap-time-list');
 
+
+
   let has_started = false;
   let has_stopped = true;
-  let lap_count = 0;
+  let lap_counter = 0;
+  let lap_number = 0;
+  let lap_minutes = 0;
+  let lap_seconds = 0;
+  let lap_milli_seconds = 0;
 
+  let time_counter = 0;
+  let time_interval = null;
+
+  let time_hours = 0;
+  let time_minutes = 0;
+  let time_seconds = 0;
+  let time_milli_seconds = 0;
 
   console.log(start_button);
   console.log(lap_button);
@@ -123,6 +136,8 @@ $(function () {
 
     lap_button.innerHTML = 'lap';
 
+    /*time_interval = setInterval()*/
+
   }
 
   function stopWatch() {
@@ -153,9 +168,12 @@ $(function () {
   }
 
   function addLap() {
-    console.log('count lap and add time')
-    lap_count++;
-    console.log(lap_count);
+    if (has_started) {
+      console.log('count lap and add time')
+      lap_counter++;
+      console.log(lap_counter);
+
+    }
   }
 
   function displayTime() {
