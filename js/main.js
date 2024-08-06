@@ -77,30 +77,24 @@ $(function () {
   const time_display = document.getElementById('time-display');
   const lap_time_list = document.getElementById('lap-time-list');
 
-
-
   let has_started = false;
   let has_stopped = true;
+
   let lap_counter = 0;
   let lap_number = 0;
-  let lap_minutes = 0;
-  let lap_seconds = 0;
-  let lap_milli_seconds = 0;
+  let lap_time;
 
   let time_counter = 0;
   let time_interval = null;
 
-  let time_hours = 0;
-  let time_minutes = 0;
-  let time_seconds = 0;
-  let time_milli_seconds = 0;
+  let [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
 
   console.log(start_button);
   console.log(lap_button);
   console.log(time_display);
   console.log(lap_time_list);
 
-
+  /************************* add event listeners *************************/
   start_button.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -109,22 +103,29 @@ $(function () {
 
      } else {
        stopWatch();
+
      }
-
-
-  })
+  });
 
   lap_button.addEventListener('click', function (e) {
     e.preventDefault();
+
     console.log('lap button clicked');
     if (lap_button.innerHTML == 'reset') {
       resetWatch();
 
     } else {
       addLap();
-    }
-  })
 
+    }
+  });
+
+  /*===============================================================
+                stopWatch functions
+  ==================================================================*/
+  /**
+   * startWatch Function -
+   */
   function startWatch() {
     console.log('watch has started')
 
@@ -136,12 +137,18 @@ $(function () {
 
     lap_button.innerHTML = 'lap';
 
-    /*time_interval = setInterval()*/
+    if (time_interval !== null) {
+      clearInterval(time_interval);
+    }
+    time_interval = setInterval(displayTime, 10);
 
-  }
+  }//end of  startWatch Funciton
 
+  /**
+   * stopWatch Function -
+   */
   function stopWatch() {
-    console.log('watch has stopped')
+    console.log('watch has stopped');
     if (has_started) {
       has_started = false;
       has_stopped = true;
@@ -150,23 +157,47 @@ $(function () {
       start_button.classList.toggle('btn--green');
 
       lap_button.innerHTML = 'reset';
+      clearInterval(time_interval);
     }
 
-  }
+  }//end of stopWatch Function
+
+  /**
+   * resetWatch Function -
+   */
   function resetWatch() {
     console.log('reset watch');
+
     start_button.innerHTML = 'start';
     lap_button.innerHTML = 'lap';
     start_button.classList.remove('btn--red');
     start_button.classList.add('btn--green');
     lap_count = 0;
-    console.log(lap_count)
-  }
 
-  function resumeWatch() {
-    console.log('resume watch time')
-  }
+    console.log(lap_count);
 
+    clearInterval(time_interval);
+    [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
+
+    let h = hours < 10 ? '0' + hours : hours;
+
+    let m = minutes < 10 ? '0' + minutes : minutes;
+
+    let s = seconds < 10 ? '0' + seconds : seconds;
+
+    let ms = milli_seconds < 10
+       ? '00' + milli_seconds
+       : milli_seconds < 100
+          ? '0' + milli_seconds
+          : milli_seconds;
+
+    time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
+
+  }//end of resetWatch Function
+
+  /**
+   * addLap Function -
+   */
   function addLap() {
     if (has_started) {
       console.log('count lap and add time')
@@ -174,10 +205,40 @@ $(function () {
       console.log(lap_counter);
 
     }
-  }
 
+  }//end of addLap Function
+
+  /**
+   * displayTime Function -
+   */
   function displayTime() {
-    console.log('')
-  }
+    milli_seconds += 10;
+    if (milli_seconds == 1000) {
+      milli_seconds = 0;
+      seconds++;
+      if (seconds == 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes == 60) {
+          minutes = 0;
+          hours++;
+        }
+      }
+    }
 
+    let h = hours < 10 ? '0' + hours : hours;
+
+    let m = minutes < 10 ? '0' + minutes : minutes;
+
+    let s = seconds < 10 ? '0' + seconds : seconds;
+
+    let ms = milli_seconds < 10
+       ? '00' + milli_seconds
+       : milli_seconds < 100
+       ? '0' + milli_seconds
+       : milli_seconds;
+
+    time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
+
+  }//end of displayTime Function
 });
