@@ -7,7 +7,7 @@ $(window).on('load', function () {
 });
 
 /*=============================================
-         js-voice-note-app scripts
+         js-stopwatch scripts
 ================================================*/
 $(function () {
   //**************** variables ****************//
@@ -69,7 +69,9 @@ $(function () {
     })
   })
 });
-
+/*===============================================================
+          js-stopwatch scripts
+==================================================================*/
 $(function () {
   //**************** variables ****************//
   const start_button = document.getElementById('start-btn');
@@ -77,6 +79,7 @@ $(function () {
   const time_display = document.getElementById('time-display');
   const lap_time_list = document.getElementById('lap-time-list');
 
+  let display_content;
   let has_started = false;
   let has_stopped = true;
 
@@ -92,6 +95,7 @@ $(function () {
   console.log(start_button);
   console.log(lap_button);
   console.log(time_display);
+
   console.log(lap_time_list);
 
   /************************* add event listeners *************************/
@@ -120,9 +124,7 @@ $(function () {
     }
   });
 
-  /*===============================================================
-                stopWatch functions
-  ==================================================================*/
+  /************************* functions *************************/
   /**
    * startWatch Function -
    */
@@ -186,9 +188,9 @@ $(function () {
     let s = seconds < 10 ? '0' + seconds : seconds;
 
     let ms = milli_seconds < 10
-       ? '00' + milli_seconds
+       ? '0' + milli_seconds
        : milli_seconds < 100
-          ? '0' + milli_seconds
+          ? '' + milli_seconds
           : milli_seconds;
 
     time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
@@ -202,7 +204,10 @@ $(function () {
     if (has_started) {
       console.log('count lap and add time')
       lap_counter++;
-      console.log(lap_counter);
+      lap_number = getLapCount();
+      console.log(lap_number);
+      display_content = getLapTime();
+      console.log(display_content);
 
     }
 
@@ -212,8 +217,8 @@ $(function () {
    * displayTime Function -
    */
   function displayTime() {
-    milli_seconds += 10;
-    if (milli_seconds == 1000) {
+    milli_seconds += 1;
+    if (milli_seconds == 100) {
       milli_seconds = 0;
       seconds++;
       if (seconds == 60) {
@@ -233,12 +238,22 @@ $(function () {
     let s = seconds < 10 ? '0' + seconds : seconds;
 
     let ms = milli_seconds < 10
-       ? '00' + milli_seconds
-       : milli_seconds < 100
        ? '0' + milli_seconds
+       : milli_seconds < 100
+       ?  '' + milli_seconds
        : milli_seconds;
 
     time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
 
   }//end of displayTime Function
+
+  function getLapTime() {
+      return time_display.innerHTML;
+
+  }//end of getLapTime Function
+
+  function getLapCount() {
+    return lap_counter.toString();
+
+  }//end of getLapCount Function
 });

@@ -192,7 +192,15 @@ small, .text_small {
 }
 
 input, textarea {
-  font-family: var(--ff-font-body);
+  font-family: var(--ff-font-display);
+}
+
+textarea:-moz-placeholder,
+textarea::-moz-placeholder,
+textarea:-ms-input-placeholder,
+textarea::-webkit-input-placeholder,
+textarea::placeholder { /* Modern browsers */
+  color: var(--clr-neutral-100);
 }
 
 ul {
@@ -426,6 +434,8 @@ section.time-wrapper {
   font-family: var(--ff-font-display);
   text-align: center;
   color: var(--clr-neutral-100);
+  background-color: var(--clr-neutral-800);
+  border: none;
 }
 
 #time-display.time-display-area {
