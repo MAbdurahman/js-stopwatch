@@ -79,6 +79,11 @@ $(function () {
   const time_display = document.getElementById('time-display');
   const lap_time_list = document.getElementById('lap-time-list');
 
+  const no_lap_count = document.querySelector('.no-lap-count');
+
+  console.log(no_lap_count
+  )
+
   let display_content;
   let has_started = false;
   let has_stopped = true;
@@ -178,6 +183,7 @@ $(function () {
     lap_counter = 0;
     lap_number = lap_counter;
 
+
     console.log(lap_counter);
     console.log(lap_number);
 
@@ -198,6 +204,8 @@ $(function () {
 
     time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
 
+    deleteAllLapCountItems();
+
   }//end of resetWatch Function
 
   /**
@@ -205,16 +213,48 @@ $(function () {
    */
   function addLap() {
     if (has_started) {
-      console.log('count lap and add time')
+      /*console.log('count lap and add time')
       lap_counter++;
       lap_number = getLapCount();
       console.log(lap_number);
       display_content = getLapTime();
-      console.log(display_content);
+      console.log(display_content);*/
+
+      lap_counter++;
+      lap_number = getLapCount();
+      addLapCountItem();
 
     }
 
   }//end of addLap Function
+
+  function addLapCountItem() {
+    const id = new Date().getTime().toString();
+    let attr = document.createAttribute('data-id');
+    attr.value = id;
+
+    const template = document.querySelector('#template');
+    const clone = document.importNode(template.content, true);
+    clone.querySelector('.lap-count-item').setAttributeNode(attr);
+    clone.querySelector('.lap-count-inner-wrapper');
+    clone.querySelector('.lap-count-number').textContent = `Lap ${lap_number}`;
+    clone.querySelector('.lap-count-time').textContent = `${getLapTime()}`;
+    clone.querySelector('.lap-count-line');
+
+    lap_time_list.prepend(clone);
+
+  }//end of addLapCountItem Function
+
+
+  function deleteAllLapCountItems() {
+    lap_time_list.innerHTML = '';
+
+  }//end of deleteAllLapCountItems function
+
+  function toggleNoLapCount() {
+    document.getElementById('no-lap-count').classList.toggle('no-lap-count-hidden');
+    document.getElementById('no-lap-count-para').classList.toggle('no-lap-count-para-hidden');
+  }
 
   /**
    * displayTime Function -
