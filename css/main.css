@@ -195,12 +195,17 @@ input, textarea {
   font-family: var(--ff-font-display);
 }
 
+textarea {
+  resize: none;
+}
+
 textarea:-moz-placeholder,
 textarea::-moz-placeholder,
 textarea:-ms-input-placeholder,
 textarea::-webkit-input-placeholder,
 textarea::placeholder { /* Modern browsers */
-  color: var(--clr-neutral-100);
+  /*color: var(--clr-neutral-100);*/
+  color: #ffffff;
 }
 
 ul {

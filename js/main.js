@@ -94,6 +94,7 @@ $(function () {
 
   console.log(start_button);
   console.log(lap_button);
+
   console.log(time_display);
 
   console.log(lap_time_list);
@@ -174,9 +175,11 @@ $(function () {
     lap_button.innerHTML = 'lap';
     start_button.classList.remove('btn--red');
     start_button.classList.add('btn--green');
-    lap_count = 0;
+    lap_counter = 0;
+    lap_number = lap_counter;
 
-    console.log(lap_count);
+    console.log(lap_counter);
+    console.log(lap_number);
 
     clearInterval(time_interval);
     [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
