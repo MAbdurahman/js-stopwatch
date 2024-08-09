@@ -72,8 +72,8 @@ $(function () {
 /*===============================================================
           js-stopwatch scripts
 ==================================================================*/
-$(function () {
-  //**************** variables ****************//
+/*$(function () {
+  //!**************** variables ****************!//
   const start_button = document.getElementById('start-btn');
   const lap_button = document.getElementById('lap-btn');
   const time_display = document.getElementById('time-display');
@@ -104,7 +104,7 @@ $(function () {
 
   console.log(lap_time_list);
 
-  /************************* add event listeners *************************/
+  /!************************* add event listeners *************************!/
   start_button.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -130,10 +130,10 @@ $(function () {
     }
   });
 
-  /************************* functions *************************/
-  /**
+  /!************************* functions *************************!/
+  /!**
    * startWatch Function -
-   */
+   *!/
   function startWatch() {
     console.log('watch has started')
 
@@ -152,9 +152,9 @@ $(function () {
 
   }//end of  startWatch Funciton
 
-  /**
+  /!**
    * stopWatch Function -
-   */
+   *!/
   function stopWatch() {
     console.log('watch has stopped');
     if (has_started) {
@@ -170,9 +170,9 @@ $(function () {
 
   }//end of stopWatch Function
 
-  /**
+  /!**
    * resetWatch Function -
-   */
+   *!/
   function resetWatch() {
     console.log('reset watch');
 
@@ -208,17 +208,17 @@ $(function () {
 
   }//end of resetWatch Function
 
-  /**
+  /!**
    * addLap Function -
-   */
+   *!/
   function addLap() {
     if (has_started) {
-      /*console.log('count lap and add time')
+      /!*console.log('count lap and add time')
       lap_counter++;
       lap_number = getLapCount();
       console.log(lap_number);
       display_content = getLapTime();
-      console.log(display_content);*/
+      console.log(display_content);*!/
 
       lap_counter++;
       lap_number = getLapCount();
@@ -256,9 +256,9 @@ $(function () {
     document.getElementById('no-lap-count-para').classList.toggle('no-lap-count-para-hidden');
   }
 
-  /**
+  /!**
    * displayTime Function -
-   */
+   *!/
   function displayTime() {
     milli_seconds += 1;
     if (milli_seconds == 100) {
@@ -299,4 +299,50 @@ $(function () {
     return lap_counter.toString();
 
   }//end of getLapCount Function
+});*/
+
+
+$(function () {
+  /************************* variables *************************/
+  const start_button = document.getElementById('start-btn');
+  const lap_button = document.getElementById('lap-btn');
+  const time_display = document.getElementById('time-display');
+  const lap_time_list = document.getElementById('lap-time-list');
+
+  const [hours, minutes, seconds, milli_seconds] = [];
+  const [formatted_hours, formatted_minutes, formatted_seconds, formatted_milli_seconds] = [];
+
+  let start_time = 0;
+  let lap_start_time = 0;
+  let current_time = 0;
+  let elapsed_time = 0;
+
+  let lap_count = 1;
+  let is_running = false;
+
+
+
+  console.log(start_button);
+  console.log(lap_button);
+  console.log(time_display);
+  console.log(lap_time_list);
+
+  /************************* functions *************************/
+
+  function formatTime(time) {
+    milli_seconds = Math.floor((time % 1000) / 10);
+    seconds = Math.floor((time / 1000) % 60);
+    minutes = Math.floor((time / 1000 / 60) % 60);
+    hours = Math.floor(time / 1000 / 60 / 60);
+
+    formatted_hours = hours.toString().padStart(2, '0');
+    formatted_minutes = minutes.toString().padStart(2, '0');
+    formatted_seconds = seconds.toString().padStart(2, '0');
+    formatted_milli_seconds = milli_seconds.toString().padStart(2, '0');
+
+    return `${formatted_hours}:${formatted_minutes}:${formatted_seconds}.${formatted_milli_seconds}`;
+
+  }//end of formatTime function
+
+
 });
