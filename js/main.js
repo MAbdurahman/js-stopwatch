@@ -33,26 +33,24 @@ $(function () {
       document.querySelector('.indicator.selected').classList.remove('selected');
       indicator.classList.add('selected');
       slider.style.transform = 'translate(' + carousel_index * -50 + '%)';
-    })
+    });
   });
   
   slider_contents.forEach(function (slider_content, index) {
     slider_content.addEventListener('touchstart', function (e) {
-      console.log(e);
       e.preventDefault();
       e.stopPropagation();
-      console.log(e.target);
+
       if (e.touches.length !== 1) {
         return;
+
       }
       initial_position = e.touches[0].screenX;
-      
-      
-      console.log(e.target);
       is_swipping = true;
-    })
+
+    });
+
     slider_content.addEventListener('touchmove',function (e) {
-      console.log(e);
       if (e.touches.length !== 1) {
         return;
       }
@@ -60,207 +58,76 @@ $(function () {
         return;
       }
       swipping_distance = e.touches[0].screenX - initial_position;
-      console.log('sliding: ', e.touches[0].screenX - initial_position);
-    })
+
+    });
+
     slider_content.addEventListener('touchend', function (e) {
-      
-      
       is_swipping = false;
-    })
+
+    });
   })
 });
-/*===============================================================
-          js-stopwatch scripts
-==================================================================*/
-/*$(function () {
-  //!**************** variables ****************!//
+
+$(function () {
+  /************************* variables *************************/
   const start_button = document.getElementById('start-btn');
   const lap_button = document.getElementById('lap-btn');
   const time_display = document.getElementById('time-display');
   const lap_time_list = document.getElementById('lap-time-list');
 
-  const no_lap_count = document.querySelector('.no-lap-count');
+  let [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
+  let [formatted_hours, formatted_minutes, formatted_seconds, formatted_milli_seconds] = [0, 0, 0, 0];
+  let milliseconds = 0;
+  let lap_startTime_milliseconds = 0;
+  let lap_stopTime_milliseconds = 0;
+  let lapTime_milliseconds = 0;
+  let formatted_time = '';
 
-  console.log(no_lap_count
-  )
-
-  let display_content;
-  let has_started = false;
-  let has_stopped = true;
+  let start_time = 0;
+  let lap_start_time = 0;
+  let current_time = 0;
+  let elapsed_time = 0;
 
   let lap_counter = 0;
   let lap_number = 0;
-  let lap_time;
+  let lap_time = 0;
 
-  let time_counter = 0;
+  let has_started = false;
+  let is_running = false;
+  let has_stopped = true;
+
   let time_interval = null;
-
-  let [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
 
   console.log(start_button);
   console.log(lap_button);
-
   console.log(time_display);
-
   console.log(lap_time_list);
 
-  /!************************* add event listeners *************************!/
-  start_button.addEventListener('click', function (e) {
-    e.preventDefault();
+  /************************* functions *************************/
 
-     if (start_button.innerHTML == 'start') {
-       startWatch();
+  function formatTime(time) {
+    let ms = Math.floor((time % 1000) / 10);
+    let sec = Math.floor((time / 1000) % 60);
+    let min = Math.floor((time / 1000 / 60) % 60);
+    let hrs = Math.floor(time / 1000 / 60 / 60);
 
-     } else {
-       stopWatch();
+    formatted_hours = hrs.toString().padStart(2, '0');
+    formatted_minutes = min.toString().padStart(2, '0');
+    formatted_seconds = sec.toString().padStart(2, '0');
+    formatted_milli_seconds = ms.toString().padStart(2, '0');
 
-     }
-  });
+    return `${formatted_hours}:${formatted_minutes}:${formatted_seconds}.${formatted_milli_seconds}`;
 
-  lap_button.addEventListener('click', function (e) {
-    e.preventDefault();
+  }//end of formatTime function
 
-    console.log('lap button clicked');
-    if (lap_button.innerHTML == 'reset') {
-      resetWatch();
+  function getLapTimeMilliseconds(startTime, endTime) {
+    return endTime - startTime;
 
-    } else {
-      addLap();
+  }//end of getLapTimeMilliseconds
 
-    }
-  });
-
-  /!************************* functions *************************!/
-  /!**
-   * startWatch Function -
-   *!/
-  function startWatch() {
-    console.log('watch has started')
-
-    has_started = true;
-    has_stopped = false;
-    start_button.innerHTML = 'stop'
-    start_button.classList.toggle('btn--green');
-    start_button.classList.toggle('btn--red');
-
-    lap_button.innerHTML = 'lap';
-
-    if (time_interval !== null) {
-      clearInterval(time_interval);
-    }
-    time_interval = setInterval(displayTime, 10);
-
-  }//end of  startWatch Funciton
-
-  /!**
-   * stopWatch Function -
-   *!/
-  function stopWatch() {
-    console.log('watch has stopped');
-    if (has_started) {
-      has_started = false;
-      has_stopped = true;
-      start_button.innerHTML = 'start';
-      start_button.classList.toggle('btn--red');
-      start_button.classList.toggle('btn--green');
-
-      lap_button.innerHTML = 'reset';
-      clearInterval(time_interval);
-    }
-
-  }//end of stopWatch Function
-
-  /!**
-   * resetWatch Function -
-   *!/
-  function resetWatch() {
-    console.log('reset watch');
-
-    start_button.innerHTML = 'start';
-    lap_button.innerHTML = 'lap';
-    start_button.classList.remove('btn--red');
-    start_button.classList.add('btn--green');
-    lap_counter = 0;
-    lap_number = lap_counter;
-
-
-    console.log(lap_counter);
-    console.log(lap_number);
-
-    clearInterval(time_interval);
-    [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
-
-    let h = hours < 10 ? '0' + hours : hours;
-
-    let m = minutes < 10 ? '0' + minutes : minutes;
-
-    let s = seconds < 10 ? '0' + seconds : seconds;
-
-    let ms = milli_seconds < 10
-       ? '0' + milli_seconds
-       : milli_seconds < 100
-          ? '' + milli_seconds
-          : milli_seconds;
-
-    time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
-
-    deleteAllLapCountItems();
-
-  }//end of resetWatch Function
-
-  /!**
-   * addLap Function -
-   *!/
-  function addLap() {
-    if (has_started) {
-      /!*console.log('count lap and add time')
-      lap_counter++;
-      lap_number = getLapCount();
-      console.log(lap_number);
-      display_content = getLapTime();
-      console.log(display_content);*!/
-
-      lap_counter++;
-      lap_number = getLapCount();
-      addLapCountItem();
-
-    }
-
-  }//end of addLap Function
-
-  function addLapCountItem() {
-    const id = new Date().getTime().toString();
-    let attr = document.createAttribute('data-id');
-    attr.value = id;
-
-    const template = document.querySelector('#template');
-    const clone = document.importNode(template.content, true);
-    clone.querySelector('.lap-count-item').setAttributeNode(attr);
-    clone.querySelector('.lap-count-inner-wrapper');
-    clone.querySelector('.lap-count-number').textContent = `Lap ${lap_number}`;
-    clone.querySelector('.lap-count-time').textContent = `${getLapTime()}`;
-    clone.querySelector('.lap-count-line');
-
-    lap_time_list.prepend(clone);
-
-  }//end of addLapCountItem Function
-
-
-  function deleteAllLapCountItems() {
-    lap_time_list.innerHTML = '';
-
-  }//end of deleteAllLapCountItems function
-
-  function toggleNoLapCount() {
-    document.getElementById('no-lap-count').classList.toggle('no-lap-count-hidden');
-    document.getElementById('no-lap-count-para').classList.toggle('no-lap-count-para-hidden');
-  }
-
-  /!**
-   * displayTime Function -
-   *!/
   function displayTime() {
     milli_seconds += 1;
+    milliseconds += 1;
     if (milli_seconds == 100) {
       milli_seconds = 0;
       seconds++;
@@ -283,66 +150,194 @@ $(function () {
     let ms = milli_seconds < 10
        ? '0' + milli_seconds
        : milli_seconds < 100
-       ?  '' + milli_seconds
-       : milli_seconds;
+          ?  '' + milli_seconds
+          : milli_seconds;
 
     time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
 
   }//end of displayTime Function
 
+
+  function startWatch() {
+    console.log('watch has started')
+
+    has_started = true;
+    is_running = true;
+    has_stopped = false;
+    start_button.innerHTML = 'stop'
+    start_button.classList.toggle('btn--green');
+    start_button.classList.toggle('btn--red');
+
+    lap_button.innerHTML = 'lap';
+
+    if (time_interval !== null) {
+      clearInterval(time_interval);
+    }
+    time_interval = setInterval(displayTime, 10);
+    /*lap_startTime_milliseconds = getMilliseconds();*/
+    lap_startTime_milliseconds = Date.now();
+    console.log('start time milliseconds -> ' + lap_startTime_milliseconds);
+
+  }//end of  startWatch Funciton
+
+  function stopWatch() {
+    console.log('watch has stopped');
+
+    if (has_started) {
+      has_started = false;
+      is_running = false;
+      has_stopped = true;
+      start_button.innerHTML = 'start';
+      start_button.classList.toggle('btn--red');
+      start_button.classList.toggle('btn--green');
+
+      lap_button.innerHTML = 'reset';
+      clearInterval(time_interval);
+      /*lap_stopTime_milliseconds = getMilliseconds();*/
+      lap_stopTime_milliseconds = Date.now();
+      console.log('this is lap_stopTime_milliseconds ' , lap_stopTime_milliseconds);
+
+    }
+
+  }//end of stopWatch Function
+
+  function resetWatch() {
+    console.log('reset watch');
+
+    start_button.innerHTML = 'start';
+    lap_button.innerHTML = 'lap';
+    start_button.classList.remove('btn--red');
+    start_button.classList.add('btn--green');
+    lap_counter = 0;
+    lap_number = lap_counter;
+
+    clearInterval(time_interval);
+    [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
+    /*milliseconds = 0;*/
+
+    let h = hours < 10 ? '0' + hours : hours;
+
+    let m = minutes < 10 ? '0' + minutes : minutes;
+
+    let s = seconds < 10 ? '0' + seconds : seconds;
+
+    let ms = milli_seconds < 10
+       ? '0' + milli_seconds
+       : milli_seconds < 100
+          ? '' + milli_seconds
+          : milli_seconds;
+
+    time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
+
+    deleteAllLapCountItems();
+
+  }//end of resetWatch Function
+
+  function deleteAllLapCountItems() {
+    lap_time_list.innerHTML = '';
+
+  }//end of deleteAllLapCountItems function
+
+  function addLap() {
+    if (has_started) {
+      lap_counter++;
+      lap_number = getLapCount();
+      console.log('this is lap count -> ' + lap_number);
+      console.log('lap start time milliseconds -> ' + lap_startTime_milliseconds);
+
+      /*lap_stopTime_milliseconds = getMilliseconds();*/
+      console.log('lap stop time milliseconds -> ' + lap_stopTime_milliseconds);
+
+      /*current_time = getMilliseconds();*/
+      current_time = Date.now();
+
+      console.log('current time in milliseconds -> ' +current_time);
+
+      lapTime_milliseconds = getLapTimeMilliseconds(lap_startTime_milliseconds, current_time);
+      console.log('this is lapTime_milliseconds -> ' + lapTime_milliseconds);
+
+      lap_time = formatTime(lapTime_milliseconds);
+      console.log('this is lap time -> ' + lap_time);
+
+      addLapCountItem();
+
+      lap_startTime_milliseconds = current_time;
+
+
+
+    }
+
+  }//end of addLap Function
+
+  function addLapCountItem() {
+    const id = new Date().getTime().toString();
+    let attr = document.createAttribute('data-id');
+    attr.value = id;
+    console.log('lap id ' + parseInt(id));
+
+    const template = document.querySelector('#template');
+    const clone = document.importNode(template.content, true);
+    clone.querySelector('.lap-count-item').setAttributeNode(attr);
+    clone.querySelector('.lap-count-inner-wrapper');
+    clone.querySelector('.lap-count-number').textContent = `Lap ${getLapCount()}`;
+    clone.querySelector('.lap-count-time').textContent = `${getLapTime()}`;
+    clone.querySelector('.lap-count-line');
+
+    lap_time_list.prepend(clone);
+
+  }//end of addLapCountItem function
+
+  function getMilliseconds() {
+    return milliseconds;
+
+  }//end of getMilliseconds function
+
   function getLapTime() {
-      return time_display.innerHTML;
+
+    /*lapTime_milliseconds = getLapTimeMilliseconds(lap_startTime_milliseconds, lap_stopTime_milliseconds);
+    lap_time = formatTime(lapTime_milliseconds);*/
+
+    return lap_time;
 
   }//end of getLapTime Function
 
   function getLapCount() {
-    return lap_counter.toString();
+   return lap_counter < 10 ? '0' + lap_counter.toString() : lap_counter.toString();
 
   }//end of getLapCount Function
-});*/
-
-
-$(function () {
-  /************************* variables *************************/
-  const start_button = document.getElementById('start-btn');
-  const lap_button = document.getElementById('lap-btn');
-  const time_display = document.getElementById('time-display');
-  const lap_time_list = document.getElementById('lap-time-list');
-
-  const [hours, minutes, seconds, milli_seconds] = [];
-  const [formatted_hours, formatted_minutes, formatted_seconds, formatted_milli_seconds] = [];
-
-  let start_time = 0;
-  let lap_start_time = 0;
-  let current_time = 0;
-  let elapsed_time = 0;
-
-  let lap_count = 1;
-  let is_running = false;
 
 
 
-  console.log(start_button);
-  console.log(lap_button);
-  console.log(time_display);
-  console.log(lap_time_list);
 
-  /************************* functions *************************/
+  console.log('this is lap count at bottom -> ' + getLapCount());
+  console.log('this is lap time at bottom -> ' + getLapTime());
 
-  function formatTime(time) {
-    milli_seconds = Math.floor((time % 1000) / 10);
-    seconds = Math.floor((time / 1000) % 60);
-    minutes = Math.floor((time / 1000 / 60) % 60);
-    hours = Math.floor(time / 1000 / 60 / 60);
-
-    formatted_hours = hours.toString().padStart(2, '0');
-    formatted_minutes = minutes.toString().padStart(2, '0');
-    formatted_seconds = seconds.toString().padStart(2, '0');
-    formatted_milli_seconds = milli_seconds.toString().padStart(2, '0');
-
-    return `${formatted_hours}:${formatted_minutes}:${formatted_seconds}.${formatted_milli_seconds}`;
-
-  }//end of formatTime function
+  console.log('formatTime for 3864 msec -> ' + formatTime(3864))
 
 
+
+  /************************* add event listeners *************************/
+  start_button.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    if (start_button.innerHTML == 'start') {
+      startWatch();
+
+    } else {
+      stopWatch();
+
+    }
+  })
+
+  lap_button.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    if (lap_button.innerHTML == 'reset') {
+      resetWatch();
+
+    } else {
+      addLap();
+
+    }
+  })
 });

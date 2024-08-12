@@ -708,6 +708,12 @@ section.lap-wrapper {
   font-family: var(--ff-font-display);
 }
 
+/*.lap-count-number {
+  text-align: end;
+}
+.lap-count-number .description {
+  text-align: start;
+}*/
 .lap-count-line {
   display: block;
   width: 100%;
