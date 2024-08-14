@@ -85,6 +85,10 @@ $(function () {
   let current_time = 0;
   let formatted_time = '';
 
+  let start_time = 0;
+  let elapsed_time = 0;
+  let time = 0;
+
   let lap_counter = 0;
   let lap_number = 0;
   let lap_time = 0;
@@ -166,13 +170,17 @@ $(function () {
 
     lap_button.innerHTML = 'lap';
 
-    if (time_interval !== null) {
+    /*if (time_interval !== null) {
       clearInterval(time_interval);
     }
-    time_interval = setInterval(displayTime, 10);
+    time_interval = setInterval(displayTime, 10);*/
 
     lap_startTime_milliseconds = Date.now();
     console.log('start time milliseconds -> ' + lap_startTime_milliseconds);
+
+    start_time = Date.now();
+
+    requestAnimationFrame(updateTime);
 
   }//end of  startWatch Funciton
 
@@ -224,12 +232,13 @@ $(function () {
     time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
 
     deleteAllLapCountItems();
-    addInterimPlaceholder();
+
 
   }//end of resetWatch Function
 
   function deleteAllLapCountItems() {
     lap_time_list.innerHTML = '';
+    addInterimPlaceholder();
 
   }//end of deleteAllLapCountItems function
 
@@ -289,6 +298,25 @@ $(function () {
    return lap_counter < 10 ? '0' + lap_counter.toString() : lap_counter.toString();
 
   }//end of getLapCount Function
+
+
+
+
+  function updateTime() {
+    if (has_started) {
+      time = Date.now() - start_time;
+      updateDisplayTime(time);
+      requestAnimationFrame(updateTime);
+
+    }
+
+  }//end of updateTime function
+
+  function updateDisplayTime(time) {
+    const formatted_time = formatTime(has_started ? time : elapsed_time);
+    time_display.innerHTML = formatted_time;
+
+  }//end of updateDisplayTime function
 
   /************************* add event listeners *************************/
   start_button.addEventListener('click', function (e) {
