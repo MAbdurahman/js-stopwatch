@@ -217,9 +217,14 @@ input::placeholder {
   color: var(--clr-neutral-100);
 }
 
-.interim:empty:before {
+*::placeholder,
+input::placeholder {
+  color: var(--clr-neutral-500);
+}
+
+.interim-paragraph:empty:before {
   content: attr(data-placeholder);
-  color: var(--clr-augmented-200);
+  color: var(--clr-neutral-500);
 }
 
 /*=============================================
@@ -678,14 +683,10 @@ section.lap-wrapper {
   scrollbar-width: none;
 }
 
-.no-lap-count, .no-lap-count-para {
+.interim-paragraph-parent, .interim-paragraph {
   display: block;
   font-size: 1rem;
   color: var(--clr-neutral-500);
-}
-
-.no-lap-count-hidden, .no-lap-count-para-hidden {
-  display: none;
 }
 
 .lap-count-item {

@@ -74,19 +74,16 @@ $(function () {
   const lap_button = document.getElementById('lap-btn');
   const time_display = document.getElementById('time-display');
   const lap_time_list = document.getElementById('lap-time-list');
+  const interim_paragraph_parent = document.getElementById('interim-paragraph-parent');
 
   let [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
   let [formatted_hours, formatted_minutes, formatted_seconds, formatted_milli_seconds] = [0, 0, 0, 0];
-  let milliseconds = 0;
+
   let lap_startTime_milliseconds = 0;
   let lap_stopTime_milliseconds = 0;
   let lapTime_milliseconds = 0;
-  let formatted_time = '';
-
-  let start_time = 0;
-  let lap_start_time = 0;
   let current_time = 0;
-  let elapsed_time = 0;
+  let formatted_time = '';
 
   let lap_counter = 0;
   let lap_number = 0;
@@ -127,7 +124,6 @@ $(function () {
 
   function displayTime() {
     milli_seconds += 1;
-    milliseconds += 1;
     if (milli_seconds == 100) {
       milli_seconds = 0;
       seconds++;
@@ -174,7 +170,7 @@ $(function () {
       clearInterval(time_interval);
     }
     time_interval = setInterval(displayTime, 10);
-    /*lap_startTime_milliseconds = getMilliseconds();*/
+
     lap_startTime_milliseconds = Date.now();
     console.log('start time milliseconds -> ' + lap_startTime_milliseconds);
 
@@ -193,10 +189,9 @@ $(function () {
 
       lap_button.innerHTML = 'reset';
       clearInterval(time_interval);
-      /*lap_stopTime_milliseconds = getMilliseconds();*/
+
       lap_stopTime_milliseconds = Date.now();
       console.log('this is lap_stopTime_milliseconds ' , lap_stopTime_milliseconds);
-
     }
 
   }//end of stopWatch Function
@@ -213,7 +208,6 @@ $(function () {
 
     clearInterval(time_interval);
     [milli_seconds, seconds, minutes, hours] = [0, 0, 0, 0];
-    /*milliseconds = 0;*/
 
     let h = hours < 10 ? '0' + hours : hours;
 
@@ -230,6 +224,7 @@ $(function () {
     time_display.innerHTML = `${h}:${m}:${s}.${ms}`;
 
     deleteAllLapCountItems();
+    addInterimPlaceholder();
 
   }//end of resetWatch Function
 
@@ -242,38 +237,22 @@ $(function () {
     if (has_started) {
       lap_counter++;
       lap_number = getLapCount();
-      console.log('this is lap count -> ' + lap_number);
-      console.log('lap start time milliseconds -> ' + lap_startTime_milliseconds);
 
-      /*lap_stopTime_milliseconds = getMilliseconds();*/
-      console.log('lap stop time milliseconds -> ' + lap_stopTime_milliseconds);
-
-      /*current_time = getMilliseconds();*/
       current_time = Date.now();
-
-      console.log('current time in milliseconds -> ' +current_time);
-
       lapTime_milliseconds = getLapTimeMilliseconds(lap_startTime_milliseconds, current_time);
-      console.log('this is lapTime_milliseconds -> ' + lapTime_milliseconds);
-
       lap_time = formatTime(lapTime_milliseconds);
-      console.log('this is lap time -> ' + lap_time);
 
       addLapCountItem();
-
       lap_startTime_milliseconds = current_time;
-
-
+      lap_counter > 0 ? removeInterimPlaceholder() : '';
 
     }
-
-  }//end of addLap Function
+  }//end of addLap function
 
   function addLapCountItem() {
     const id = new Date().getTime().toString();
     let attr = document.createAttribute('data-id');
     attr.value = id;
-    console.log('lap id ' + parseInt(id));
 
     const template = document.querySelector('#template');
     const clone = document.importNode(template.content, true);
@@ -287,34 +266,29 @@ $(function () {
 
   }//end of addLapCountItem function
 
-  function getMilliseconds() {
-    return milliseconds;
+  function addInterimPlaceholder() {
+    lap_time_list.innerHTML += `<li id="interim-paragraph-parent" class="interim-paragraph-parent">
+                    <p class="interim-paragraph" spellcheck="false" contentEditable=false data-placeholder="No laps counted."></p>
+                </li>`;
 
-  }//end of getMilliseconds function
+  }//end of the addInterimPlaceholde function
+
+  function removeInterimPlaceholder() {
+    const interimPlaceholder = document.getElementById('interim-paragraph-parent');
+    if (interimPlaceholder) {
+      interimPlaceholder.style.display = 'none';
+    }
+  }//end of removeInterimPlaceholder function
 
   function getLapTime() {
-
-    /*lapTime_milliseconds = getLapTimeMilliseconds(lap_startTime_milliseconds, lap_stopTime_milliseconds);
-    lap_time = formatTime(lapTime_milliseconds);*/
-
     return lap_time;
 
-  }//end of getLapTime Function
+  }//end of getLapTime function
 
   function getLapCount() {
    return lap_counter < 10 ? '0' + lap_counter.toString() : lap_counter.toString();
 
   }//end of getLapCount Function
-
-
-
-
-  console.log('this is lap count at bottom -> ' + getLapCount());
-  console.log('this is lap time at bottom -> ' + getLapTime());
-
-  console.log('formatTime for 3864 msec -> ' + formatTime(3864))
-
-
 
   /************************* add event listeners *************************/
   start_button.addEventListener('click', function (e) {
