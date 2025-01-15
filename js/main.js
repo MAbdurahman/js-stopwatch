@@ -259,7 +259,8 @@ $(function () {
   }//end of addLap function
 
   function addLapCountItem() {
-    const id = new Date().getTime().toString();
+    // const id = new Date().getTime().toString();
+    const id = self.crypto.randomUUID();
     let attr = document.createAttribute('data-id');
     attr.value = id;
 
